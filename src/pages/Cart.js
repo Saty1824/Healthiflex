@@ -1,21 +1,19 @@
+import { useCart } from "../context/CartContext";
 import { useTitle } from "../hooks/useTitle"
 import { CartCard } from "../components"
 
 export const Cart = () => {
-  useTitle("Cart")
-  const products = [
-    {"id": 1, "name": "Scitron Advance Whey Protein", "price": 2099, "image": "/assets/images/Product-1.jpg"},
-    {"id": 2, "name": "Isopure Low Carb Whey Protein Isolate Powder", "price": 4239, "image": "/assets/images/Product-2.jpg"}
-  ]
+  const { total, cartList } = useCart();
+  useTitle("Cart");
   return (
     <main>
       <section className="cart">
         <h1>
-          Cart Item: {products.length}
+          Cart Items: {cartList.length} / ₹{total}
         </h1>
-        {products.map((product)=>(
-          <CartCard key={product} product={product}/> 
-        )) }
+        { cartList.map((product) => (
+          <CartCard key={product.id} product={product} />
+        )) }   
       </section>
     </main>
   )
